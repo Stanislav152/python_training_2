@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
-from group import Group
+
 
 class Test1(unittest.TestCase):
     def setUp(self):
@@ -13,13 +13,13 @@ class Test1(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_1(self, group):
+    def test_1(self):
         driver = self.driver
         self.open_home_page(driver)
         self.manual_login(driver, username="admin", password="secret")
         self.open_group_page(driver)
         self.init_group_creation(driver)
-        self.fill_group_form(driver, group(name="ppp"))
+        self.fill_group_form(driver, name="ppp")
         self.submit_group_creation(driver)
         #open groups page
         #driver.find_element_by_link_text("groups").click()
@@ -51,11 +51,11 @@ class Test1(unittest.TestCase):
         # submit group creation
         driver.find_element_by_name("submit").click()
 
-    def fill_group_form(self, driver, Group):
+    def fill_group_form(self, driver, name):
         # fill group form
         driver.find_element_by_name("group_name").click()
         driver.find_element_by_name("group_name").clear()
-        driver.find_element_by_name("group_name").send_keys(Group.name)
+        driver.find_element_by_name("group_name").send_keys(name)
 
     def init_group_creation(self, driver):
         # init group creation

@@ -15,9 +15,7 @@ class Test1(unittest.TestCase):
     
     def test_1(self):
         driver = self.driver
-        self.open_home_page(driver)
         self.manual_login(driver, username="admin", password="secret")
-        self.open_group_page(driver)
         self.init_group_creation(driver)
         self.fill_group_form(driver, name="ppp")
         self.submit_group_creation(driver)
@@ -59,6 +57,7 @@ class Test1(unittest.TestCase):
 
     def init_group_creation(self, driver):
         # init group creation
+        self.open_group_page(driver)
         driver.find_element_by_name("new").click()
 
     def open_group_page(self, driver):
@@ -67,6 +66,7 @@ class Test1(unittest.TestCase):
 
     def manual_login(self, driver, username, password):
         # waiting for manual login
+        self.open_home_page(driver)
         driver.find_element_by_name("user").click()
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys(username)
